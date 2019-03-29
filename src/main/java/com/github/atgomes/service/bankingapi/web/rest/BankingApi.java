@@ -1,6 +1,6 @@
 package com.github.atgomes.service.bankingapi.web.rest;
 
-import com.github.atgomes.service.bankingapi.domain.Payment;
+import com.github.atgomes.service.bankingapi.config.ApplicationProperties;
 import com.github.atgomes.service.bankingapi.domain.enumeration.BalanceType;
 import com.github.atgomes.service.bankingapi.service.BalanceService;
 import com.github.atgomes.service.bankingapi.service.BankAccountService;
@@ -10,17 +10,17 @@ import com.github.atgomes.service.bankingapi.service.dto.BalanceDTO;
 import com.github.atgomes.service.bankingapi.service.dto.BankAccountDTO;
 import com.github.atgomes.service.bankingapi.service.dto.PaymentDTO;
 import com.github.atgomes.service.bankingapi.service.dto.UserDTO;
+import com.github.atgomes.service.bankingapi.service.util.IbanTestResponse;
 import com.github.atgomes.service.bankingapi.service.util.PaymentTentative;
-import com.github.atgomes.service.bankingapi.web.rest.errors.InsufficientFundsException;
-import com.github.atgomes.service.bankingapi.web.rest.errors.InternalServerErrorException;
-import com.github.atgomes.service.bankingapi.web.rest.errors.InvalidDestinationAccountException;
-import com.github.atgomes.service.bankingapi.web.rest.errors.InvalidOriginAccountException;
+import com.github.atgomes.service.bankingapi.web.rest.errors.*;
 import com.github.atgomes.service.bankingapi.web.rest.util.HeaderUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -46,11 +46,15 @@ public class BankingApi {
 
     private final PaymentService paymentService;
 
-    public BankingApi(UserService userService, BankAccountService bankAccountService, BalanceService balanceService, PaymentService paymentService) {
+    private final ApplicationProperties applicationProperties;
+
+    public BankingApi(UserService userService, BankAccountService bankAccountService,
+                      BalanceService balanceService, PaymentService paymentService, ApplicationProperties applicationProperties) {
         this.userService = userService;
         this.bankAccountService = bankAccountService;
         this.balanceService = balanceService;
         this.paymentService = paymentService;
+        this.applicationProperties = applicationProperties;
     }
 
     @GetMapping("/bank-accounts")
@@ -77,8 +81,20 @@ public class BankingApi {
             throw new InvalidOriginAccountException("Unauthorized account", ENTITY_NAME, "unauth_account");
         }
 
-        // Validate destination account (IBAN, that it's not the same as giver, and not banned)
-        // TODO Validate IBAN
+        // If there is an issue connecting to remote API, accepts the IBAN as valid
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<IbanTestResponse> response
+                = restTemplate.getForEntity(applicationProperties.getIbanTestApiUrl() +
+                paymentTentative.getBeneficiaryAccountNumber() + "?authcode=" +
+                applicationProperties.getIbanTestApiKey(), IbanTestResponse.class);
+
+            if (response.getBody().getCode().compareTo(2999) > 0) {
+                throw new InvalidIbanException("Invalid IBAN", ENTITY_NAME, "invalid_iban");
+            }
+        } catch (RestClientException ex) {
+            log.info(ex.getMessage());
+        }
 
         // Validate not the same as giver
         if (paymentTentative.getBeneficiaryAccountNumber().equals(paymentTentative.getGiverAccount())) {

@@ -11,4 +11,22 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
 
+    private String ibanTestApiKey;
+    private String ibanTestApiUrl;
+
+    public String getIbanTestApiKey() {
+        return ibanTestApiKey;
+    }
+
+    public void setIbanTestApiKey(String ibanTestApiKey) {
+        this.ibanTestApiKey = ibanTestApiKey;
+    }
+
+    public String getIbanTestApiUrl() {
+        return ibanTestApiUrl;
+    }
+
+    public void setIbanTestApiUrl(String ibanTestApiUrl) {
+        this.ibanTestApiUrl = ibanTestApiUrl;
+    }
 }

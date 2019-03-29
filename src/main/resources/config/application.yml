@@ -159,4 +159,6 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+    iban-test-api-key: 28d094cebe2b72d7d0abe588a874a0e2
+    iban-test-api-url: https://www.iban-test.de/api/check/

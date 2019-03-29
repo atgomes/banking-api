@@ -97,6 +97,7 @@
         <sonar.tests>${project.basedir}/src/test/</sonar.tests>
 
         <!-- jhipster-needle-maven-property -->
+        <spring-banner-plugin.version>1.0</spring-banner-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -423,6 +424,20 @@
                 <artifactId>jib-maven-plugin</artifactId>
             </plugin>
             <!-- jhipster-needle-maven-add-plugin -->
+            <plugin>
+                <groupId>ch.acanda.maven</groupId>
+                <artifactId>spring-banner-plugin</artifactId>
+                <version>${spring-banner-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-spring-banner</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
