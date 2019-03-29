@@ -1,0 +1,47 @@
+{
+    "name": "BankAccount",
+    "fields": [
+        {
+            "fieldName": "accountNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "accountName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "balance",
+            "otherEntityRelationshipName": "bankAccount",
+            "relationshipName": "balance"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "payment",
+            "otherEntityRelationshipName": "giverAccount",
+            "relationshipName": "payment"
+        },
+        {
+            "relationshipName": "customer",
+            "otherEntityName": "customer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190329135904",
+    "entityTableName": "bank_account",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "BankingAPI",
+    "applications": "*",
+    "microserviceName": "BankingAPI"
+}

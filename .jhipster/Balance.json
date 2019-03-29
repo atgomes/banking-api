@@ -1,0 +1,36 @@
+{
+    "name": "Balance",
+    "fields": [
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "currency",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "BalanceType",
+            "fieldValues": "END_OF_DAY,AVAILABLE"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "bankAccount",
+            "otherEntityName": "bankAccount",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190329135906",
+    "entityTableName": "balance",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "BankingAPI",
+    "applications": "*",
+    "microserviceName": "BankingAPI"
+}

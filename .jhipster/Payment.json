@@ -1,0 +1,52 @@
+{
+    "name": "Payment",
+    "fields": [
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "currency",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "beneficiaryAccountNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "beneficiaryName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "communication",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "creationDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "bankAccount",
+            "otherEntityRelationshipName": "payment",
+            "relationshipName": "giverAccount",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190329135907",
+    "entityTableName": "payment",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "BankingAPI",
+    "applications": "*",
+    "microserviceName": "BankingAPI"
+}

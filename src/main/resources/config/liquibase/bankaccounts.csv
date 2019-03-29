@@ -1,0 +1,4 @@
+id;account_number;account_name;status;customer_id
+1;LU280019400644750000;account1;true;1
+2;LU851231231231231232;account2;true;1
+3;LU755327465763654871;account3;true;2

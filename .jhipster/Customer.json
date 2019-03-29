@@ -1,0 +1,35 @@
+{
+    "name": "Customer",
+    "fields": [
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "customer",
+            "relationshipName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "bankAccount",
+            "otherEntityRelationshipName": "customer",
+            "relationshipName": "bankAccount"
+        }
+    ],
+    "changelogDate": "20190329135905",
+    "entityTableName": "customer",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "BankingAPI",
+    "applications": "*",
+    "microserviceName": "BankingAPI"
+}

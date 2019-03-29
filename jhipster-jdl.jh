@@ -1,0 +1,48 @@
+entity BankAccount {
+	accountNumber String,
+    accountName String,
+    status Boolean
+}
+
+entity Customer {
+    address String
+}
+
+entity Balance {
+	amount BigDecimal,
+    currency String,
+    type BalanceType
+}
+
+enum BalanceType {
+	END_OF_DAY, AVAILABLE
+}
+
+entity Payment {
+	amount BigDecimal,
+    currency String,
+    beneficiaryAccountNumber String,
+    beneficiaryName String,
+    communication String,
+    creationDate Instant,
+    status String
+}
+
+relationship OneToOne {
+	Customer{user} to User
+}
+
+relationship OneToMany {
+	Customer{bankAccount} to BankAccount,
+	BankAccount{balance} to Balance,
+	BankAccount to Payment{giverAccount}
+}
+
+// Use Data Transfert Objects (DTO)
+ dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="00000000000002" author="atgomes">
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/balances.csv"
+                  separator=";"
+                  tableName="balance">
+            <column name="currency" type="string"/>
+            <column name="jhi_type" type="string"/>
+        </loadData>
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/customers.csv"
+                  separator=";"
+                  tableName="customer">
+            <column name="address" type="string"/>
+        </loadData>
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/bankaccounts.csv"
+                  separator=";"
+                  tableName="bank_account">
+        <column name="account_number" type="string"/>
+        <column name="account_name" type="string"/>
+        <column name="status" type="boolean"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

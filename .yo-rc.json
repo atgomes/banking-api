@@ -1,0 +1,35 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.github.atgomes.service.bankingapi"
+    },
+    "jhipsterVersion": "5.8.2",
+    "applicationType": "microservice",
+    "baseName": "BankingAPI",
+    "packageName": "com.github.atgomes.service.bankingapi",
+    "packageFolder": "com/github/atgomes/service/bankingapi",
+    "serverPort": "8010",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "N2IyOTFlMjVjOWQzZTliYjkwYzI4NDVmNTBjOTJhYWNlYmQ1MTg0NmYzNzIxMjU1NTE3NjNmY2NjYjlkOGNlOTJkYmM1NTkwZTJiNWFkZmQwNDNhODIyYTM1OGU3OTdhOTExYzE3YTg4MGMyMTE3NTIwNjU1NGZhZjgxNGYyZmI=",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
